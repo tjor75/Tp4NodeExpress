@@ -18,15 +18,19 @@ app.get('/', (req, res) => {                // EndPoint '/'
     res.send('Ya estoy respondiendo!');
 })
 
-app.get('/saludar', (req, res) => {             // EndPoint "/saludar"
-
-    res.send('Hello World!');
-
-})
-
-app.get('/saludar/:nombre', (req, res) => {
+app.get('/saludar/:nombre', (req, res) => {             // EndPoint "/saludar"
     if (req.params.nombre !== undefined)
         res.send(`Hola ${req.params.nombre}`);
+    else
+        res.sendStatus(400);
+})
+
+app.get('/validarfecha/:ano/:mes/:dia', (req, res) => {
+    if (req.params.ano !== undefined &&
+        req.params.mes !== undefined &&
+        req.params.dia !== undefined &&
+        !isNaN(Date.parse(`${req.params.mes}/${req.params.dia}/${req.params.ano}`)))
+        res.sendStatus(200);
     else
         res.sendStatus(400);
 })
@@ -35,29 +39,37 @@ app.get('/saludar/:nombre', (req, res) => {
 // Endpoints que reutilizan el módulo matemática.js
 //
 app.get('/matematica/sumar', (req, res) => {
-    if (req.query.n1 !== undefined || req.query.n2 !== undefined)
-        res.send(sumar(Number(req.query.n1), Number(req.query.n2)));
+    const resultado = sumar(Number(req.query.n1), Number(req.query.n2));
+
+    if (!isNaN(resultado))
+        res.send(resultado);
     else
         res.sendStatus(400);
 })
 
 app.get('/matematica/restar', (req, res) => {
-    if (req.query.n1 !== undefined || req.query.n2 !== undefined)
-        res.send(restar(Number(req.query.n1), Number(req.query.n2)));
+    const resultado = restar(Number(req.query.n1), Number(req.query.n2));
+
+    if (!isNaN(resultado))
+        res.send(resultado);
     else
         res.sendStatus(400);
 })
 
 app.get('/matematica/multiplicar', (req, res) => {
-    if (req.query.n1 !== undefined || req.query.n2 !== undefined)
-        res.send(multiplicar(Number(req.query.n1), Number(req.query.n2)));
+    const resultado = multiplicar(Number(req.query.n1), Number(req.query.n2));
+
+    if (!isNaN(resultado))
+        res.send(resultado);
     else
         res.sendStatus(400);
 })
 
 app.get('/matematica/dividir', (req, res) => {
-    if (req.query.n1 !== undefined || req.query.n2 !== undefined)
-        res.send(dividir(Number(req.query.n1), Number(req.query.n2)));
+    const resultado = dividir(Number(req.query.n1), Number(req.query.n2));
+
+    if (!isNaN(resultado))
+        res.send(resultado);
     else
         res.sendStatus(400);
 })
