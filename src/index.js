@@ -82,10 +82,10 @@ app.get('/matematica/dividir', (req, res) => {
 // Endpoints que reutilizan el módulo omdb-wrapper.js
 //
 app.get('/omdb/searchbypage', async (req, res) => {
-    const page = Number(req.query.p);
+    const page = parseInt(req.query.p) || 1;
     let returnObject;
 
-    if (req.query.search !== undefined && !isNaN(page)) {
+    if (req.query.search !== undefined) {
         returnObject = await OMDBSearchByPage(req.query.search, page);
         res.status(returnObject.respuesta ? 200 : 404).json(returnObject);
     } else {
