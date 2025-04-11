@@ -18,29 +18,48 @@ app.get('/', (req, res) => {                // EndPoint '/'
     res.send('Ya estoy respondiendo!');
 })
 
-app.get('/saludar/:nombre', (req, res) => {             // EndPoint '/saludar'
+app.get('/saludar', (req, res) => {             // EndPoint "/saludar"
+
+    res.send('Hello World!');
+
+})
+
+app.get('/saludar/:nombre', (req, res) => {
     if (req.params.nombre !== undefined)
         res.send(`Hola ${req.params.nombre}`);
     else
-        res.sendStatus(404);
+        res.sendStatus(400);
 })
 
 //
 // Endpoints que reutilizan el módulo matemática.js
 //
 app.get('/matematica/sumar', (req, res) => {
+    if (req.query.n1 !== undefined || req.query.n2 !== undefined)
+        res.send(sumar(Number(req.query.n1), Number(req.query.n2)));
+    else
+        res.sendStatus(400);
 })
 
 app.get('/matematica/restar', (req, res) => {
-
+    if (req.query.n1 !== undefined || req.query.n2 !== undefined)
+        res.send(restar(Number(req.query.n1), Number(req.query.n2)));
+    else
+        res.sendStatus(400);
 })
 
 app.get('/matematica/multiplicar', (req, res) => {
-    
+    if (req.query.n1 !== undefined || req.query.n2 !== undefined)
+        res.send(multiplicar(Number(req.query.n1), Number(req.query.n2)));
+    else
+        res.sendStatus(400);
 })
 
 app.get('/matematica/dividir', (req, res) => {
-    
+    if (req.query.n1 !== undefined || req.query.n2 !== undefined)
+        res.send(dividir(Number(req.query.n1), Number(req.query.n2)));
+    else
+        res.sendStatus(400);
 })
 
 //
