@@ -1,0 +1,25 @@
+{
+  "name": "tp4nodeexpress",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tjor75/Tp4NodeExpress.git"
+  },
+  "author": "Uriel Engelberg & Lucas Tjor",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tjor75/Tp4NodeExpress/issues"
+  },
+  "homepage": "https://github.com/tjor75/Tp4NodeExpress#readme",
+  "dependencies": {
+    "axios": "^1.8.4",
+    "express": "^5.1.0"
+  }
+}
