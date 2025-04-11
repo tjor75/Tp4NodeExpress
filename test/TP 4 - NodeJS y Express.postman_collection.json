@@ -1,0 +1,254 @@
+{
+	"info": {
+		"_postman_id": "521b85fe-c2f6-4566-aad0-1218a8dd1771",
+		"name": "TP 4 - NodeJS y Express",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Endpoints comunes",
+			"item": [
+				{
+					"name": "/",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Saludar con nombre",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/saludar/Uriel",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"saludar",
+								"Uriel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validar fecha (true)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/validarfecha/2025/03/21",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"validarfecha",
+								"2025",
+								"03",
+								"21"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validar fecha (false)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/validarfecha/2025/21/03",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"validarfecha",
+								"2025",
+								"21",
+								"03"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Endpoints que reutilizan el módulo matemática.js",
+			"item": [
+				{
+					"name": "Sumar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/matematica/sumar?n1=2&n2=4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"matematica",
+								"sumar"
+							],
+							"query": [
+								{
+									"key": "n1",
+									"value": "2"
+								},
+								{
+									"key": "n2",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Restar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/matematica/restar?n1=2&n2=4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"matematica",
+								"restar"
+							],
+							"query": [
+								{
+									"key": "n1",
+									"value": "2"
+								},
+								{
+									"key": "n2",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Multiplicar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/matematica/multiplicar?n1=2&n2=4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"matematica",
+								"multiplicar"
+							],
+							"query": [
+								{
+									"key": "n1",
+									"value": "2"
+								},
+								{
+									"key": "n2",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Dividir",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/matematica/dividir?n1=2&n2=4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"matematica",
+								"dividir"
+							],
+							"query": [
+								{
+									"key": "n1",
+									"value": "2"
+								},
+								{
+									"key": "n2",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Dividir por 0",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/matematica/dividir?n1=2&n2=0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"matematica",
+								"dividir"
+							],
+							"query": [
+								{
+									"key": "n1",
+									"value": "2"
+								},
+								{
+									"key": "n2",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Endpoints que reutilizan el módulo omdb-wrapper.js",
+			"item": [
+				{
+					"name": "Buscar por página",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
