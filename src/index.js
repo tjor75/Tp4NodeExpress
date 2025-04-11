@@ -81,8 +81,20 @@ app.get('/matematica/dividir', (req, res) => {
 //
 // Endpoints que reutilizan el módulo omdb-wrapper.js
 //
-app.get('/omdb/searchbypage', (req, res) => {
-    OMDBSearchByPage()
+app.get('/omdb/searchbypage', async (req, res) => {
+    const page = Number(req.query.p);
+    let returnObject;
+
+    if (req.query.search !== undefined && !isNaN(page)) {
+        returnObject = await OMDBSearchByPage(req.query.search, page);
+        res.status(returnObject.respuesta ? 200 : 404).json(returnObject);
+    } else {
+        res.status(400).json({
+            respuesta : false,
+            cantidadTotal : 0,
+            datos : []
+        });
+    }
 })
 
 app.get('/omdb/searchcomplete', (req, res) => {
