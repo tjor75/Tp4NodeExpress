@@ -66,10 +66,14 @@ app.get('/matematica/multiplicar', (req, res) => {
 })
 
 app.get('/matematica/dividir', (req, res) => {
-    const resultado = dividir(Number(req.query.n1), Number(req.query.n2));
+    const n1 = Number(req.query.n1);
+    const n2 = Number(req.query.n2);
 
-    if (!isNaN(resultado))
-        res.send(resultado);
+    if (!isNaN(n1) && !isNaN(n2))
+        if (n2 !== 0)
+            res.send(dividir(n1, n2));
+        else
+            res.status(400).send("El divisor no puede ser cero");
     else
         res.sendStatus(400);
 })
@@ -78,7 +82,7 @@ app.get('/matematica/dividir', (req, res) => {
 // Endpoints que reutilizan el módulo omdb-wrapper.js
 //
 app.get('/omdb/searchbypage', (req, res) => {
-    
+    OMDBSearchByPage()
 })
 
 app.get('/omdb/searchcomplete', (req, res) => {
