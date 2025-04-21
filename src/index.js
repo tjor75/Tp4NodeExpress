@@ -97,8 +97,19 @@ app.get('/omdb/searchbypage', async (req, res) => {
     }
 })
 
-app.get('/omdb/searchcomplete', (req, res) => {
-    
+app.get('/omdb/searchcomplete', async (req, res) => {
+    let returnObject;
+
+    if (req.query.search !== undefined) {
+        returnObject = await OMDBSearchComplete(req.query.search);
+        res.status(returnObject.respuesta ? 200 : 404).json(returnObject);
+    } else {
+        res.status(400).json({
+            respuesta : false,
+            cantidadTotal : 0,
+            datos : []
+        });
+    }
 })
 
 app.get('/omdb/getbyomdbid', (req, res) => {
