@@ -6,6 +6,7 @@ import {OMDBSearchByPage, OMDBSearchComplete, OMDBGetByImdbID} from './modules/o
 
 const app  = express();
 const port = 3000;              // El puerto 3000 (http://localhost:3000)
+const alumnosArray = [];
 
 // Agrego los Middlewares
 app.use(cors());         // Middleware de CORS
@@ -82,7 +83,7 @@ app.get('/matematica/dividir', (req, res) => {
 // Endpoints que reutilizan el módulo omdb-wrapper.js
 //
 app.get('/omdb/searchbypage', async (req, res) => {
-    const page = parseInt(req.query.p) || 1;
+    const page = parseInt(req.query.p) ?? 1;
     let returnObject;
 
     if (req.query.search !== undefined) {
@@ -112,15 +113,26 @@ app.get('/omdb/searchcomplete', async (req, res) => {
     }
 })
 
-app.get('/omdb/getbyomdbid', (req, res) => {
-    
+app.get('/omdb/getbyomdbid', async (req, res) => {
+    let returnObject;
+
+    if (req.query.imdbID !== undefined) {
+        returnObject = await OMDBGetByImdbID(req.query.imdbID);
+        res.status(returnObject.respuesta ? 200 : 404).json(returnObject);
+    } else {
+        res.status(400).json({
+            respuesta : false,
+            cantidadTotal : 0,
+            datos : {}
+        });
+    }
 })
 
 //
 // Endpoints que reutilizan el módulo de clase Alumno.
 //
-app.get('/alumnos', (req, res) => {
-    
+app.get('/alumnos', async (req, res) => {
+    res.json(alumnosArray);
 })
 
 app.get('/alumnos/:dni', (req, res) => {

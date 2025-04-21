@@ -61,7 +61,7 @@ const OMDBSearchComplete = async (searchText) => {
             cantidadObtenida += response.data.Search.length;
         }
 
-        while (returnObject.respuesta && cantidadObtenida < returnObject.cantidadTotal && page < 100) {
+        while (respuesta && cantidadObtenida < cantidadTotal && page < 100) {
             page++;
             requestUrl = armarRequestUrl({ s: searchText, page });
             response = await axios.get(requestUrl);
