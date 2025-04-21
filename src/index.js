@@ -136,7 +136,17 @@ app.get('/alumnos', async (req, res) => {
 })
 
 app.get('/alumnos/:dni', async (req, res) => {
-    
+    let posAlumno;
+
+    if (typeof req.params.dni !== "undefined") {
+        posAlumno = alumnosArray.findIndex(alumno => alumno.dni === req.params.dni);
+        if (posAlumno !== -1)
+            res.json(alumnosArray[posAlumno]);
+        else
+            res.sendStatus(404);
+    }
+    else
+        res.sendStatus(400);
 })
 
 app.post('/alumnos', (req, res) => {
