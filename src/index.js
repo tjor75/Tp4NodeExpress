@@ -135,12 +135,20 @@ app.get('/alumnos', async (req, res) => {
     res.json(alumnosArray);
 })
 
-app.get('/alumnos/:dni', (req, res) => {
+app.get('/alumnos/:dni', async (req, res) => {
     
 })
 
 app.post('/alumnos', (req, res) => {
-    
+    console.log(typeof req.body.edad === "number")
+    if (typeof req.body.nombre === "string" && req.body.nombre.length > 0 &&
+        typeof req.body.dni === "string" && req.body.dni.length > 0 &&
+        typeof req.body.edad === "number") {
+        alumnosArray.push(new Alumno(req.body.nombre, req.body.dni, req.body.edad));
+        res.sendStatus(201);
+    } else {
+        res.sendStatus(400);
+    }
 })
 
 app.delete('/alumnos', (req, res) => {
