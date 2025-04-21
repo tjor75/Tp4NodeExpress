@@ -140,9 +140,8 @@ app.get('/alumnos/:dni', async (req, res) => {
 })
 
 app.post('/alumnos', (req, res) => {
-    console.log(typeof req.body.edad === "number")
-    if (typeof req.body.nombre === "string" && req.body.nombre.length > 0 &&
-        typeof req.body.dni === "string" && req.body.dni.length > 0 &&
+    if (typeof req.body.nombre === "string" && req.body.nombre !== "" &&
+        typeof req.body.dni === "string" && req.body.dni !== "" &&
         typeof req.body.edad === "number") {
         alumnosArray.push(new Alumno(req.body.nombre, req.body.dni, req.body.edad));
         res.sendStatus(201);
@@ -152,7 +151,19 @@ app.post('/alumnos', (req, res) => {
 })
 
 app.delete('/alumnos', (req, res) => {
-    
+    let posAlumno;
+
+    if (typeof req.body.dni === "string") {
+        posAlumno = alumnosArray.findIndex(alumno => alumno.dni === req.body.dni);
+        if (posAlumno !== -1) {
+            alumnosArray.splice(posAlumno, 1);
+            res.sendStatus(200);
+        } else {
+            res.sendStatus(404);
+        }
+    }
+    else
+        res.sendStatus(400);
 })
 
 
