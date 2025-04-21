@@ -136,17 +136,11 @@ app.get('/alumnos', async (req, res) => {
 })
 
 app.get('/alumnos/:dni', async (req, res) => {
-    let posAlumno;
-
-    if (typeof req.params.dni !== "undefined") {
-        posAlumno = alumnosArray.findIndex(alumno => alumno.dni === req.params.dni);
-        if (posAlumno !== -1)
-            res.json(alumnosArray[posAlumno]);
-        else
-            res.sendStatus(404);
-    }
+    const posAlumno = alumnosArray.findIndex(alumno => alumno.dni === req.params.dni);
+    if (posAlumno !== -1)
+        res.json(alumnosArray[posAlumno]);
     else
-        res.sendStatus(400);
+        res.sendStatus(404);
 })
 
 app.post('/alumnos', (req, res) => {
@@ -182,5 +176,5 @@ app.delete('/alumnos', (req, res) => {
 // Inicio el Server y lo pongo a escuchar.
 //
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+    console.log(`App en puerto ${port}`)
 })
