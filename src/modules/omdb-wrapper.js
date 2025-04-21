@@ -49,14 +49,15 @@ const OMDBSearchComplete = async (searchText) => {
     let page = 1;
     let requestUrl;
     let response;
+    let respuesta, cantidadTotal = 0, datos = [];
 
     try {
         requestUrl = armarRequestUrl({ s: searchText });
         response = await axios.get(requestUrl);
-        returnObject.respuesta = response.data.Response === "True";
-        if (returnObject.respuesta) {
-            returnObject.cantidadTotal = parseInt(response.data.totalResults);
-            returnObject.datos.push(...response.data.Search);
+        respuesta = response.data.Response === "True";
+        if (respuesta) {
+            cantidadTotal = parseInt(response.data.totalResults);
+            datos.push(...response.data.Search);
             cantidadObtenida += response.data.Search.length;
         }
 
@@ -64,12 +65,17 @@ const OMDBSearchComplete = async (searchText) => {
             page++;
             requestUrl = armarRequestUrl({ s: searchText, page });
             response = await axios.get(requestUrl);
-            returnObject.datos.push(...response.data.Search);
+            datos.push(...response.data.Search);
             cantidadObtenida += response.data.Search.length;
         }
+
+        returnObject.respuesta = respuesta;
+        returnObject.cantidadTotal = cantidadTotal;
+        returnObject.datos = datos;
     } catch (error) {
         console.error("No se pudo conectar a la API:", error);
     }
+    
     return returnObject;
 };
 const OMDBGetByImdbID = async (imdbID) => {
